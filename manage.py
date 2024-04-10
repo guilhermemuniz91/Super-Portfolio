@@ -4,7 +4,6 @@ import os
 import sys
 
 
-#   initial commit
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "super_portfolio.settings")
