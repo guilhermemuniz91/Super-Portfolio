@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from projects.models import Profile
-from projects.serializers import ProfileSerializer
+from projects.models import Profile, Project
+from projects.serializers import ProfileSerializer, ProjectSerializer
 
 # Create your views here.
 
@@ -20,3 +20,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
             }
             return render(request, "profile_detail.html", context)
         return super().retrieve(request, *args, **kwargs)
+
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
