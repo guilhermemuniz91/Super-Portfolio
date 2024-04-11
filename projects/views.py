@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from projects.models import Profile, Project
 from projects.serializers import ProfileSerializer, ProjectSerializer
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 # Create your views here.
 
@@ -9,6 +10,11 @@ from projects.serializers import ProfileSerializer, ProjectSerializer
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]
+        return [IsAuthenticated()]
 
     def retrieve(self, request, *args, **kwargs):
         if request.method == "GET":
