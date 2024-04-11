@@ -1,7 +1,17 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from projects.models import Profile, Project
-from projects.serializers import ProfileSerializer, ProjectSerializer
+from projects.models import (
+    Profile,
+    Project,
+    CertifyingInstitution,
+    Certificate,
+)
+from projects.serializers import (
+    ProfileSerializer,
+    ProjectSerializer,
+    CertifyingInstitutionSerializer,
+    CertificateSerializer,
+)
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 # Create your views here.
@@ -12,7 +22,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
     def get_permissions(self):
-        if self.request.method == 'GET':
+        if self.request.method == "GET":
             return [AllowAny()]
         return [IsAuthenticated()]
 
@@ -31,3 +41,13 @@ class ProfileViewSet(viewsets.ModelViewSet):
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+
+class CertificateViewSet(viewsets.ModelViewSet):
+    queryset = Certificate.objects.all()
+    serializer_class = CertificateSerializer
+
+
+class CertifyingInstitutionViewSet(viewsets.ModelViewSet):
+    queryset = CertifyingInstitution.objects.all()
+    serializer_class = CertifyingInstitutionSerializer
